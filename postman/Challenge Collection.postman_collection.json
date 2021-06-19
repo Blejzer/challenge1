@@ -1,0 +1,493 @@
+{
+	"info": {
+		"_postman_id": "464dcb4f-a402-454f-b376-8ccfd1907981",
+		"name": "Challenge Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Skiers (new skier)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Nedzad",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/skiers",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Skiers/resorts (new skier with resort)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "names",
+							"value": "Ahmed",
+							"type": "text"
+						},
+						{
+							"key": "namer",
+							"value": "Zlatibor",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/skiers/withresort",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers",
+						"withresort"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Skiers (FindAll)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/skiers",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Skiers/Resorts (FindAll with Resorts",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:5000/skiers/withresort",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers",
+						"withresort"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "skiers/:id (querySkierByPk)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/skiers/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "skiers/:id (removeSkierByPk)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/skiers/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "skiers/:id (renameSkierByPk)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "names",
+							"value": "Nikola",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/skiers/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "skiers/:id/resorts (addResortToSkierByPk)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "namer",
+							"value": "Igman",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/skiers/:id/resorts",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers",
+						":id",
+						"resorts"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "skiers/:id/resorts (removeResortFromSkierByPk)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "namer",
+							"value": "Jahorina",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/skiers/:id/resorts",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers",
+						":id",
+						"resorts"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "skiers/:id/resorts (getSkierByPkWithResorts)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "namer",
+							"value": "Igman",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/skiers/:id/resorts",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"skiers",
+						":id",
+						"resorts"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resorts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "resorts/:id (queryResortByPk)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/resorts/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"resorts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resorts/:id (updateResortByPk)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "namer",
+							"value": "Trebević",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/resorts/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"resorts",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resorts (new resort)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Trebevic",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/resorts",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"resorts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "resorts/:id/skiers (getResortByPkWithSkiers)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "namer",
+							"value": "Igman",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:5000/resorts/:id/skiers",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"resorts",
+						":id",
+						"skiers"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
