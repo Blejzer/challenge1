@@ -7,7 +7,7 @@ const newResort = async (req, res) => {
 };
 
 const getResortByPk = async (req, res) => {
-    const resort = await resortService.getResortByPk(req.params.id);
+    const resort = await resortService.queryResortByPk(req.params.id);
     res.status(httpStatus.CREATED).send(resort);
 }
 
@@ -34,8 +34,19 @@ const removeResortByPk = async (req, res) => {
     }
 }
 
+/**
+ * Get all resorts
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 const getResorts = async (req, res) => {
     const resorts = await resortService.queryResorts();
+    res.status(httpStatus.CREATED).send(resorts);
+}
+
+const getResortsWithSkiers = async (req, res) => {
+    const resorts = await resortService.queryResortWithSkiers();
     res.status(httpStatus.CREATED).send(resorts);
 }
 module.exports = {
@@ -44,5 +55,6 @@ module.exports = {
     getResortByPkWithSkiers,
     updateResortName,
     removeResortByPk,
-    getResorts
+    getResorts,
+    getResortsWithSkiers
 }

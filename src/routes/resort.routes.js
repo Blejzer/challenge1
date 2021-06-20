@@ -9,6 +9,11 @@ router
     .get(resortController.getResorts);
 
 router
+    .route('/skiers')
+    .get(resortController.getResortsWithSkiers);
+
+
+router
     .route('/:id')
     .get(resortController.getResortByPk)
     .delete(resortController.removeResortByPk)

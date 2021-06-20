@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node bin/challenge.js",
     "dev": "nodemon bin/challenge.js",
-    "create-db": "psql postgres -U challenge < src/seed/seedChallenge.sql",
-    "seed": "node src/seed/seed.js"
+    "create-db": "psql postgres -U challenge < seed/seedChallenge.sql",
+    "seed": "node seed/seed.js"
   },
   "keywords": [],
   "author": "",

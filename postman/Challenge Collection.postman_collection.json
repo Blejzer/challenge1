@@ -24,12 +24,7 @@
 							"value": "Nedzad",
 							"type": "text"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "text"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "localhost:5000/skiers",
@@ -68,12 +63,7 @@
 							"value": "Zlatibor",
 							"type": "text"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "text"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "localhost:5000/skiers/withresort",
@@ -258,7 +248,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "4"
+							"value": "5"
 						}
 					]
 				}
@@ -346,7 +336,35 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": "localhost:5000/resorts",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"resorts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resorts with skiers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/resorts/skiers",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"resorts",
+						"skiers"
+					]
+				}
 			},
 			"response": []
 		},
@@ -368,7 +386,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "3"
 						}
 					]
 				}
@@ -429,12 +447,7 @@
 							"value": "Trebevic",
 							"type": "text"
 						}
-					],
-					"options": {
-						"raw": {
-							"language": "text"
-						}
-					}
+					]
 				},
 				"url": {
 					"raw": "localhost:5000/resorts",
@@ -482,7 +495,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "2"
+							"value": "3"
 						}
 					]
 				}

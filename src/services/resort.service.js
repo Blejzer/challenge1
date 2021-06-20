@@ -10,15 +10,22 @@ const newResort = async (resortBody) => {
     return Resort.create(resortBody)
 };
 
-const getResortByPk = async (rid) => {
+/**
+ * Get resort by Pk
+ * @param rid
+ * @returns {Promise<Resort<id, name> | null>}
+ */
+const queryResortByPk = async (rid) => {
+    console.log(await Resort.findByPk(rid));
     return Resort.findByPk(rid)
 }
 
 
 /**
  * Update name of the resort
+ * @param id
  * @param namer
- * @returns {Promise<[number, Model<TModelAttributes, TCreationAttributes>[]]>}
+ * @returns {Promise<[number]>}
  */
 const updateResortByPk = async (id, namer) => {
 
@@ -38,10 +45,11 @@ const updateResortByPk = async (id, namer) => {
 /**
  * Find skier by Pk
  * @param resortBody - actually id
- * @returns {Promise<Resort<any, TModelAttributes>>}
+ * @returns {Promise<Resort<[id,name], Array<Skier>>>}
  */
 const queryResortByPkWithSkiers = async (resortBody) => {
     return Resort.findByPk(resortBody, {
+        atributes:['name'],
         include: [{
             model: Skier,
             as: 'skiers'
@@ -49,7 +57,11 @@ const queryResortByPkWithSkiers = async (resortBody) => {
     });
 }
 
-
+/**
+ * Delete resort from the list
+ * @param rid
+ * @returns {Promise<number>}
+ */
 const removeResortByPk = async (rid) => {
     return Resort.destroy({
         where: {'id': rid}
@@ -57,23 +69,41 @@ const removeResortByPk = async (rid) => {
 }
 
 /**
- * Get skiers
+ * Get resorts
  * @returns {Promise<Array<Resort>>}
  */
 const queryResorts = async () => {
-    const resorts = await Resort.findAll({
+    return Resort.findAll({
         attributes: ['id','name'],
         raw : true
     });
-    return resorts;
+};
+
+/**
+ * Get resorts with skiers -
+ * @returns {Promise<Resort[[id, name], Skier[]]>}
+ */
+const queryResortWithSkiers = async () => {
+    return Resort.findAll({
+        attributes: ['id','name'],
+        include: [
+            {
+                model: Skier,
+                as: 'skiers',
+                attributes: ['name']
+            }
+        ],
+        sort: ['resort.id']
+    });
 };
 
 module.exports = {
     newResort,
-    getResortByPk,
+    queryResortByPk,
     queryResortByPkWithSkiers,
     updateResortByPk,
     removeResortByPk,
-    queryResorts
+    queryResorts,
+    queryResortWithSkiers
 }
 
