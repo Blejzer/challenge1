@@ -81,9 +81,9 @@ const queryResorts = async () => {
 
 /**
  * Get resorts with skiers -
- * @returns {Promise<Resort[[id, name], Skier[]]>}
+ * @returns {Promise<Array<Resort, Array<Skier>>[]>}
  */
-const queryResortWithSkiers = async () => {
+const queryResortsWithSkiers = async () => {
     return Resort.findAll({
         attributes: ['id','name'],
         include: [
@@ -93,9 +93,27 @@ const queryResortWithSkiers = async () => {
                 attributes: ['name']
             }
         ],
-        sort: ['resort.id']
+        order: ['id']
     });
 };
+
+/**
+ * Remove single skier from resort
+ * @param body
+ * @returns {Promise<number>}
+ */
+const remSkierFromResort = async (body) => {
+    const resort = await Resort.findOne({where: {name:body.namer}}, {
+        include: [{
+            model: Skier,
+            as: 'skiers'
+        }]
+    });
+
+    const skier = await Skier.findOne({where: {name: body.names}});
+    return resort.removeSkier(skier);
+
+}
 
 module.exports = {
     newResort,
@@ -104,6 +122,7 @@ module.exports = {
     updateResortByPk,
     removeResortByPk,
     queryResorts,
-    queryResortWithSkiers
+    queryResortsWithSkiers,
+    remSkierFromResort
 }
 

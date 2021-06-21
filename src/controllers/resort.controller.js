@@ -8,7 +8,7 @@ const newResort = async (req, res) => {
 
 const getResortByPk = async (req, res) => {
     const resort = await resortService.queryResortByPk(req.params.id);
-    res.status(httpStatus.CREATED).send(resort);
+    res.status(httpStatus.OK).send(resort);
 }
 
 const updateResortName = async (req, res) => {
@@ -22,13 +22,13 @@ const updateResortName = async (req, res) => {
 
 const getResortByPkWithSkiers = async (req, res) => {
     const resort = await resortService.queryResortByPkWithSkiers(req.params.id);
-    res.status(httpStatus.CREATED).send(resort);
+    res.status(httpStatus.OK).send(resort);
 }
 
 const removeResortByPk = async (req, res) => {
     const resort = await resortService.removeResortByPk(req.params.id);
     if(resort === 1){
-        res.status(httpStatus.DELETED).redirect('/resorts');
+        res.status(httpStatus.OK).redirect('/resorts');
     }else{
         res.status(httpStatus.NOT_FOUND).send('Cannot find Resort with this ID'+req.params.id + ' to remove. Might already be removed.');
     }
@@ -42,12 +42,22 @@ const removeResortByPk = async (req, res) => {
  */
 const getResorts = async (req, res) => {
     const resorts = await resortService.queryResorts();
-    res.status(httpStatus.CREATED).send(resorts);
+    res.status(httpStatus.OK).send(resorts);
 }
 
 const getResortsWithSkiers = async (req, res) => {
-    const resorts = await resortService.queryResortWithSkiers();
-    res.status(httpStatus.CREATED).send(resorts);
+    const resorts = await resortService.queryResortsWithSkiers();
+    res.status(httpStatus.OK).send(resorts);
+}
+
+const removeSkierFromResort = async (req, res) => {
+    const result = await resortService.remSkierFromResort(req.body);
+    const resort = await resortService.queryResortByPkWithSkiers();
+    if(result === 1){
+        res.status(httpStatus.OK).send(resort);
+    }else{
+        res.status(httpStatus.NOT_FOUND).send("Skier cannot be removed from the resort. There was an error");
+    }
 }
 module.exports = {
     newResort,
@@ -56,5 +66,6 @@ module.exports = {
     updateResortName,
     removeResortByPk,
     getResorts,
-    getResortsWithSkiers
+    getResortsWithSkiers,
+    removeSkierFromResort
 }

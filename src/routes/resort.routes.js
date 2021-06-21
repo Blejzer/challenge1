@@ -23,5 +23,10 @@ router
     .route('/:id/skiers')
     .get(resortController.getResortByPkWithSkiers);
 
+router
+    .route('/resort/skier')
+    .delete(resortController.removeSkierFromResort);
+    // .put(resortController.addSkierToResortByName);
+
 
 module.exports = router;

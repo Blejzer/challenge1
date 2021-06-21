@@ -23,7 +23,7 @@ const removeSkierByPk = async (req, res) => {
 const renameSkierByPk = async (req, res) => {
     const skier = await skierService.updateSkierByPk(req.params.id, req.body.names);
     if(skier.name === req.body.names){
-        res.status(httpStatus.ACCEPTED).send(skier);
+        res.status(httpStatus.OK).send(skier);
     }else{
         res.status(httpStatus.NOT_FOUND).send("Name cannot be changed. There was an error");
     }
@@ -32,22 +32,22 @@ const renameSkierByPk = async (req, res) => {
 
 const getSkiers = async (req, res) => {
     const skiers = await skierService.querySkiers();
-    res.status(httpStatus.CREATED).send(skiers);
+    res.status(httpStatus.OK).send(skiers);
 }
 
 const getSkiersWithResorts = async (req, res) => {
     const skiers = await skierService.getSkiersWithResorts();
-    res.status(httpStatus.CREATED).send(skiers);
+    res.status(httpStatus.OK).send(skiers);
 }
 
 const getSkierByPk = async (req, res) => {
     const skier = await skierService.querySkierByPk(req.params.id);
-    res.status(httpStatus.CREATED).send(skier);
+    res.status(httpStatus.OK).send(skier);
 }
 
 const getSkierByPkWithResorts = async (req, res) => {
     const skier = await skierService.querySkierByPkWithResorts(req.params.id);
-    res.status(httpStatus.CREATED).send(skier);
+    res.status(httpStatus.OK).send(skier);
 }
 
 const addResortToSkierByPk = async (req, res) => {
@@ -57,7 +57,7 @@ const addResortToSkierByPk = async (req, res) => {
 
 const removeResortFromSkierByPk = async (req, res) => {
     const skier = await skierService.remResortFromSkierByPk(req.params.id, req.body);
-    res.status(httpStatus.CREATED).send(skier);
+    res.status(httpStatus.OK).send(skier);
 }
 module.exports = {
     newSkier,

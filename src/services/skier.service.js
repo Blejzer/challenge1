@@ -5,7 +5,7 @@ const Resort = require("../models/resort.model");
 /**
  * Create new skier
  * @param skierBody
- * @returns {Promise<Skier<name, TCreationAttributes>>}
+ * @returns {Promise<Skier>}
  */
 const newSkier = async (skierBody) => {
     return Skier.create({
@@ -14,7 +14,7 @@ const newSkier = async (skierBody) => {
 };
 
 /**
- * Create skier with new (or existign) resort
+ * Create skier with new (or existing) resort
  * @param {Object} skierBody
  * @returns {Promise<Skier>}
  */
@@ -32,8 +32,8 @@ const newSkierWithResort = async (skierBody) => {
 
 /**
  * Find skier by Pk
- * @param skierBody - actually id
- * @returns {Promise<Skier<any, TModelAttributes>>}
+ * @param skierPk - actually id
+ * @returns {Promise<Skier>}
  */
 const querySkierByPk = async (skierPk) => {
     return Skier.findByPk(skierPk)
@@ -42,8 +42,9 @@ const querySkierByPk = async (skierPk) => {
 
 /**
  * Update name of the skier
+ * @param id
  * @param names
- * @returns {Promise<[number, Model<TModelAttributes, TCreationAttributes>[]]>}
+ * @returns {Promise<Skier|number>}
  */
 const updateSkierByPk = async (id, names) => {
 
@@ -63,7 +64,7 @@ const updateSkierByPk = async (id, names) => {
 /**
  * Find skier by Pk
  * @param skierPk - actually id
- * @returns {Promise<Skier<any, TModelAttributes>>}
+ * @returns {Promise<Skier>}
  */
 const querySkierByPkWithResorts = async (skierPk) => {
     return Skier.findByPk(skierPk, {
@@ -111,7 +112,7 @@ const getSkiersWithResorts = async () => {
                 attributes: ['name']
             }
         ],
-        sort: ['skier.id']
+        order: ['id']
     });
 };
 
@@ -138,6 +139,12 @@ const addResortToSkierByPk = async (sid, body) => {
     });
 }
 
+/**
+ * Removes resort from the skier
+ * @param sid
+ * @param body
+ * @returns {Promise<*>}
+ */
 const remResortFromSkierByPk = async (sid, body) => {
     const resort = await Resort.findOne({where: {name:body.namer}});
     const skier = await Skier.findByPk(sid, {
