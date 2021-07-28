@@ -26,7 +26,4 @@ router
     .post(skierController.addResortToSkierByPk)
     .delete(skierController.removeResortFromSkierByPk);
 
-
-
-
 module.exports = router;

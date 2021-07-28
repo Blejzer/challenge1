@@ -14,7 +14,7 @@ const newSkierWResort = async (req, res) => {
 const removeSkierByPk = async (req, res) => {
     const skier = await skierService.removeSkierByPk(req.params.id);
     if(skier === 1){
-        res.status(httpStatus.DELETED).redirect('/skiers');
+        res.status(httpStatus.OK).redirect('/skiers');
     }else{
         res.status(httpStatus.NOT_FOUND).redirect('/');
     }

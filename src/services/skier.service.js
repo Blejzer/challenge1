@@ -1,6 +1,5 @@
-const Skier = require('../models/skier.model');
-const Resort = require("../models/resort.model");
-
+const Skier = require('../models/skier');
+const Resort = require("../models/resort");
 
 /**
  * Create new skier

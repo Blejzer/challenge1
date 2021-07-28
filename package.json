@@ -8,19 +8,21 @@
     "start": "node bin/challenge.js",
     "dev": "nodemon bin/challenge.js",
     "create-db": "psql postgres -U challenge < seed/seedChallenge.sql",
-    "seed": "node seed/seed.js"
+    "seed": "node --trace-deprecation seed/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "config": "^3.3.6",
     "express": "^4.17.1",
     "http-status": "^1.5.0",
     "path": "^0.12.7",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.6.2",
+    "sequelize-auto": "^0.8.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
