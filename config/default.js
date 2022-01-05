@@ -22,21 +22,14 @@ module.exports = {
 
     db: {
         host: 'localhost',
-
         database: 'challenge_baza',
-
         username: 'challenge',
-
         dialect: 'postgres',
-
         logging: false,
-
         define: {
             freezeTableNames: true,
         },
-
         sync: { force: true }
-
         // storage: 'db.postgres'
     }
 };

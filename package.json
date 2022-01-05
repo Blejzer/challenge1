@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "auto-bind": "^4.0.0",
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
     "express": "^4.17.1",
@@ -25,6 +26,7 @@
     "sequelize-auto": "^0.8.3"
   },
   "devDependencies": {
+    "eslint": "^7.32.0",
     "nodemon": "^2.0.7"
   }
 }

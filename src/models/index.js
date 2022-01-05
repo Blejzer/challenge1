@@ -22,6 +22,7 @@ function testConnection() {
  */
 function syncModels(options) {
     options.models = models(sequelize);
+    options.force = false;
     console.log('SyncModels options: ', options);
     return sequelize.sync(options);
 }
