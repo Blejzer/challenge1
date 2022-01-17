@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-// const countryController = require('../controllers/OLDcountryController');
-const controller = require('../controllers/controller1');
+// const countryController = require('../controllers/countryController')
+const Test = require('../controllers/countryController')
+let test = new Test('country')
 
-// router.post('/', countryController.addCountry);
-router.get('/', controller.findAll);
-router.get('/:id', controller.findOne);
-// router.put('/:id', countryController.updateCountry);
-// router.delete('/:id', countryController.deleteById);
-// router.get('/test/1', controler.findAll);
+router.post('/', test.add);
+router.get('/', test.findAll);
+router.get('/:id', test.findOne);
+router.put('/:id', test.update);
+router.delete('/:id', test.remove);
 
 module.exports = router;

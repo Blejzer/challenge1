@@ -1,92 +1,37 @@
-const cityRepository = require('../repository/cityRepository');
-let cityController = {
-    addCity: addCity,
-    findCities: findCities,
-    findCitiesByCountry: findCitiesByCountry,
-    findCitiesByCountryId: findCitiesByCountryId,
-    findCityById: findCityById,
-    updateCity: updateCity,
-    deleteById: deleteById
+'use strict'
+
+const Controller = require('./mainController')
+const CityRepository = require('../repository/cityRepository')
+const sequelize = require('../config/database')
+
+class CityController extends Controller {
+    constructor(model) {
+        super(model)
+        this._model = model
+        this.findOneByCity = this.findOneByCity.bind(this)
+        this.findByCountry = this.findByCountry.bind(this)
+        this.findOneWithCountry = this.findOneWithCountry.bind(this)
+        this.repo = new CityRepository(sequelize, this._model)
+    }
+
+    findOneByCity(req, res) {
+        this.repo.findOneByCity(req.body.name).then(data => {
+            res.send(data)
+        }, err => res.status(400).send(err))
+    }
+
+    findByCountry(req, res) {
+        this.repo.findAllByCountry(req.params.id).then(data => {
+            res.send(data)
+        }, err => res.status(400).send(err))
+    }
+
+    findOneWithCountry(req, res) {
+        this.repo.findOneWithCountry(req.params.id).then(data => {
+            res.send(data)
+        }, err => res.status(400).send(err))
+
+    }
 }
 
-function addCity(req, res) {
-    let city = req.body;
-    cityRepository.create(city).
-    then((data) => {
-        res.send(data);
-    })
-        .catch((error) => {
-            console.log(error);
-            res.send(400, error);
-        });
-}
-
-function findCityById(req, res) {
-    cityRepository.findById(req.params.id).
-    then((data) => {
-        res.send(data);
-    })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-
-function deleteById(req, res) {
-    cityRepository.deleteById(req.params.id).
-    then((data) => {
-        res.status(200).json({
-            message: "City deleted successfully",
-            gig: data
-        })
-    })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-
-function updateCity(req, res) {
-    cityRepository.updateCity(req.body, req.params.id).
-    then((data) => {
-        res.status(200).json({
-            message: "City updated successfully",
-            city: data
-        })
-    })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-
-function findCities(req, res) {
-    cityRepository.findAll().
-    then((data) => {
-        res.send(data);
-    })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-function findCitiesByCountry(req, res) {
-    let country_pk = req.params.id;
-    cityRepository.findAllByCountry(country_pk).
-    then((data) => {
-        res.send(data);
-    })
-        .catch((error) => {
-            console.log(error);
-            res.send(400, error);
-        });
-}
-function findCitiesByCountryId(req, res) {
-    let country_pk = req.params.id;
-    cityRepository.findAllByCountryId(country_pk).
-    then((data) => {
-        res.send(data);
-    })
-        .catch((error) => {
-            console.log(error);
-            res.send(400, error);
-        });
-}
-
-module.exports = cityController;
+module.exports = CityController

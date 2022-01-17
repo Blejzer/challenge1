@@ -1,9 +1,5 @@
 'use strict';
-const models = require('../models/init-models');
-const sequelize = require('../config/database');
 
-const Country = models(sequelize).Country;
-const City = models(sequelize).City;
 // to make sure that this is connected to the right instance...
 const autoBind = require('auto-bind');
 
@@ -59,9 +55,10 @@ class PostgreRepository {
         }
     }
 
-
     /**
-     * get /:id
+     * Get one entity where pk = id
+     * @param id
+     * @returns {Promise<*|T>}
      */
     async findOne(id) {
         try {
@@ -76,7 +73,9 @@ class PostgreRepository {
     }
 
     /**
-     * create
+     * Create new entity
+     * @param entity
+     * @returns {Promise<*|*>}
      */
     async add(entity) {
         try {
@@ -92,35 +91,44 @@ class PostgreRepository {
     }
 
     /**
-     * update
+     * Update existing entity using id to find and entity holds changed values.
+     * @param entity
+     * @param id
+     * @returns {Promise<*>}
      */
-    update(entity, cb) {
-        this.collection.update(entity, {
-            where: {
-                _id: entity._id
-            },
-            raw: true,
-            returning: true
-        }).then(data => {
-            cb(null, data[1][0]);
-        }, err => cb(err));
+    async update(entity, id) {
+        try {
+        let test = await this.collection.findByPk(id);
+        if(test){
+            return await test.update(entity).then(data => {
+                return data;
+            });
+        }
+        } catch (err){
+            return await err;
+        }
+
     }
 
     /**
-     * delete
+     * Delete entity where pk = id
+     * @param id
+     * @returns {Promise<*|*|*|undefined>}
      */
-    remove(id, cb) {
-        const self = this;
-        self.findOne(id, (err, data) => {
-            self.collection.destroy({
-                where: {
-                    _id: id
-                },
-                raw: true
-            }).then(() => {
-                cb(null, data);
-            }, err => cb(err));
-        });
+    async remove(id) {
+        try {
+            let test = await this.collection.findByPk(id);
+            if(test){
+                return await test.destroy().then(() => {
+                    return test;
+                });
+            }else {
+                return 'Entity not found. Might be already removed.'
+            }
+        } catch (err){
+            return await err;
+        }
+
     }
 
 }

@@ -1,59 +1,75 @@
-const models = require('../models/init-models');
-const sequelize = require('../config/database');
+'use strict';
 
-const City = models(sequelize).City;
-const Country = models(sequelize).Country;
-let cityRepository = {
-    findAll: findAll,
-    create: create,
-    findById: findById,
-    findAllByCountry: findAllByCountry,
-    findAllByCountryId: findAllByCountryId,
-    deleteById: deleteById,
-    updateCity: updateCity
-}
+const PostgreRepository = require("./repository");
 
-function findAll() {
-    return City.findAll();
-    // return Country.findAll();
-}
+/**
+ * City Repository has two additional functions
+ *  - findOneWithCountry - returning Promise of City with Country included
+ *  - findAllByCountry - returning Promise array<City> where Country has country_pk
+ */
+class CityRepository extends PostgreRepository {
 
-function findById(id) {
-    return City.findByPk(id);
-}
-
-function findAllByCountry(id) {
-    return City.findAll({
-        include: {
-            model: Country,
-            as: 'country_country',
-            where: {
-                country_pk: id
-            }
+    /**
+     * Find One city By PK with Eager loading including country
+     * @param id
+     * @returns {Promise<City>}
+     */
+    async findOneWithCountry(id){
+        try {
+            return await this.collection.findByPk(id,{
+                include: ['country_country'],
+                raw: true
+            }).then(data => {
+                return data;
+            });
+        } catch (err){
+            return await err;
         }
-    });
-}
-function findAllByCountryId(id) {
-    return City.findAll({
-        where: {
-            country: id
+    }
+
+    /**
+     * Find One city by Name with Eager loading including country
+     * @param city
+     * @returns {Promise<*>}
+     */
+    async findOneByCity(city){
+        try {
+            return await this.collection.findOne({
+                where: {
+                    city: city
+                },
+                // include: ['country_country'],
+                raw: true
+            }).then(data => {
+                if (data === null) {
+                    console.log('Not found!');
+                }
+                return data;
+            });
+        } catch (err){
+            return await err;
         }
-    });
-}
+    }
 
-function deleteById(id) {
-    return City.destroy({ where: { id: id } });
-}
+    /**
+     * Find all cities where country_pk = country_pk
+     * @param country_pk
+     * @returns {Promise<*>}
+     */
+    async findAllByCountry (country_pk) {
+        try {
+            return await this.collection.findAll({
+                raw: true,
+                where: {
+                    country: country_pk
+                }
+            }).then(data => {
+                return data;
+            });
+        } catch (err){
+            return await err;
+        }
+    }
 
-function create(city) {
-    let newCity = new City(city);
-    return newCity.save();
 }
-
-function updateCity(city, id) {
-    let updateCity = {
-
-    };
-    return City.update(updateCity, { where: { city_pk: id } });
-}
-module.exports = cityRepository;
+module.exports = CityRepository;

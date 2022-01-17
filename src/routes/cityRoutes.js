@@ -1,13 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const cityController = require('../controllers/cityController');
+const express = require('express')
+const router = express.Router()
+// const controller = require('../controllers/cityController')
+const Test = require('../controllers/cityController')
+let test = new Test('city')
 
-router.post('/', cityController.addCity);
-router.get('/', cityController.findCities);
-router.get('/country/:id', cityController.findCitiesByCountry);
-router.get('/co/:id', cityController.findCitiesByCountryId);
-router.get('/:id', cityController.findCityById);
-router.put('/:id', cityController.updateCity);
-router.delete('/:id', cityController.deleteById);
+router.post('/', test.add)
+router.get('/', test.findAll)
+router.get('/country/:id', test.findByCountry)
+router.get('/city/', test.findOneByCity)
+router.get('/:id', test.findOneWithCountry)
+
+//TODO router.put('/:id', cityController.updateCity);
+
+//TODO router.delete('/:id', cityController.deleteById);
 
 module.exports = router;
