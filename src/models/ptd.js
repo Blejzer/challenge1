@@ -1,15 +1,20 @@
 
 // const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('citizenship', {
-    country_pk: {
+  return sequelize.define('ptd', {
+    ptd_pk: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true
+    },
+    traveldoc_pk: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'country',
-        key: 'country_pk'
-      },
-      unique: "ind_90"
+        model: 'traveldoc',
+        key: 'traveldoc_pk'
+      }
     },
     person_pk: {
       type: DataTypes.INTEGER,
@@ -17,33 +22,35 @@ module.exports = function(sequelize, DataTypes) {
       references: {
         model: 'person',
         key: 'person_pk'
-      },
-      unique: "ind_90"
+      }
+    },
+    valid: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'citizenship',
+    tableName: 'ptd',
     schema: 'public',
     timestamps: false,
     indexes: [
       {
-        name: "fkidx_84",
+        name: "fkidx_1084",
         fields: [
-          { name: "country_pk" },
+          { name: "traveldoc_pk"},
         ]
       },
       {
-        name: "fkidx_87",
+        name: "fkidx_1087",
         fields: [
           { name: "person_pk" },
         ]
       },
       {
-        name: "ind_90",
+        name: "ptd_pk",
         unique: true,
         fields: [
-          { name: "person_pk" },
-          { name: "country_pk" },
+          { name: "ptd_pk" },
         ]
       },
     ]

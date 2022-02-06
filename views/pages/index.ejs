@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <div>
+            <% if (typeof data == 'object' && data) { %>
+                <table class="table">
+                    <% if (typeof val == 'object' && val) { %>
+                        <thead class="thead-dark">
+                        <tr>
+                            <% for(let i=0; i < val.length; i++) { %>
+                                <th scope="col">  <%= val[i] %> </th>
+                            <% } %>
+                        </tr>
+                        </thead>
+                    <% } %>
+                    <% for(const obj of data){ %>
+                        <tr>
+                            <% for(const key in obj) { %>
+                                <td scope="row"><%= obj[key] %></td>
+                            <% } %>
+                        </tr>
+                    <% } %>
+                </table>
+            <% } %>
+
+            <% if (typeof oneData == 'object' && oneData) { %>
+                <table class="table">
+                    <% if (typeof val == 'object' && val) { %>
+                        <thead class="thead-dark">
+                        <tr>
+                            <% for(let i=0; i < val.length; i++) { %>
+                                <th scope="col">  <%= val[i] %> </th>
+                            <% } %>
+                        </tr>
+                        </thead>
+                    <% } %>
+                    <tr>
+                        <% for(const key in oneData) { %>
+                            <td scope="row"><%= oneData[key] %></td>
+                        <% } %>
+                    </tr>
+
+                </table>
+            <% } %>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

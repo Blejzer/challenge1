@@ -5,6 +5,7 @@ const index = require('../src/models/index');
 const httpStatus = require("http-status");
 const router = require('../src/routes/router');
 const app = express();
+app.set('view engine', 'ejs');
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
@@ -25,7 +26,7 @@ app.get('/', (req,res) => res.send("TEST"));
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
-    next(new ApiError(httpStatus.NOT_FOUND, 'API request not found'));
+    next(new ApiError(httpStatus.NOT_FOUND, 'API request not found: ' + req.url));
 });
 
 index.syncModels({alter: true})

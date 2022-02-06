@@ -1,6 +1,7 @@
-'use strict';
+'use strict'
 
-const PostgreRepository = require("./repository");
+const PostgreRepository = require("./repository")
+const {Op} = require("sequelize")
 
 /**
  * City Repository has two additional functions
@@ -12,7 +13,7 @@ class CityRepository extends PostgreRepository {
     /**
      * Find One city By PK with Eager loading including country
      * @param id
-     * @returns {Promise<City>}
+     * @returns {Promise<*>}
      */
     async findOneWithCountry(id){
         try {
@@ -36,7 +37,9 @@ class CityRepository extends PostgreRepository {
         try {
             return await this.collection.findOne({
                 where: {
-                    city: city
+                    city: {
+                        [Op.like]: `%${city}%`
+                    }
                 },
                 // include: ['country_country'],
                 raw: true

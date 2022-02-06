@@ -245,7 +245,7 @@ module.exports = {
         {country_pk: 243, code: 'YE', name: 'Yemen'},
         {country_pk: 245, code: 'ZM', name: 'Zambia'},
         {country_pk: 246, code: 'ZW', name: 'Zimbabwe'},
-        {country_pk: 247, code: 'XK', name: 'Kosovo'},
+        {country_pk: 247, code: 'XK*', name: 'Kosovo / LES'},
         {country_pk: 248, code: 'ME', name: 'Montenegro'}
     ]
 }

@@ -19,30 +19,30 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    ttype_pk: {
+    tdtype_pk: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'ttype',
-        key: 'ttype_pk'
+        model: 'tdtype',
+        key: 'tdtype_pk'
       }
     },
-    agency_pk: {
+    facility_pk: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'agency',
-        key: 'agency_pk'
+        model: 'facility',
+        key: 'facility_pk'
       }
     },
-    city_pk: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'city',
-        key: 'city_pk'
-      }
-    }
+    // city_pk: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   references: {
+    //     model: 'city',
+    //     key: 'city_pk'
+    //   }
+    // }
   }, {
     sequelize,
     tableName: 'traveldoc',
@@ -52,21 +52,21 @@ module.exports = function(sequelize, DataTypes) {
       {
         name: "fkidx_102",
         fields: [
-          { name: "ttype_pk" },
+          { name: "tdtype_pk" },
         ]
       },
       {
         name: "fkidx_105",
         fields: [
-          { name: "agency_pk" },
+          { name: "facility_pk" },
         ]
       },
-      {
-        name: "fkidx_108",
-        fields: [
-          { name: "city_pk" },
-        ]
-      },
+      // {
+      //   name: "fkidx_108",
+      //   fields: [
+      //     { name: "city_pk" },
+      //   ]
+      // },
       {
         name: "pk_traveldoc",
         unique: true,

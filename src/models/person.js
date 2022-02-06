@@ -19,10 +19,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false
     },
-    citizenship: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     dob: {
       type: DataTypes.DATEONLY,
       allowNull: false
@@ -35,20 +31,20 @@ module.exports = function(sequelize, DataTypes) {
         key: 'city_pk'
       }
     },
-    agency: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'agency',
-        key: 'agency_pk'
-      }
+    mobile: {
+      type: DataTypes.STRING(50),
+      allowNull: false
     },
-    traveldoc: {
+    email: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    facility: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'traveldoc',
-        key: 'traveldoc_pk'
+        model: 'facility',
+        key: 'facility_pk'
       }
     }
   }, {
@@ -57,12 +53,6 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'public',
     timestamps: false,
     indexes: [
-      {
-        name: "fkidx_111",
-        fields: [
-          { name: "traveldoc" },
-        ]
-      },
       {
         name: "person_pk",
         unique: true,

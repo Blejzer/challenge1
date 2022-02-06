@@ -23,6 +23,22 @@ module.exports = function(sequelize, DataTypes) {
         key: 'person_pk'
       }
     },
+    ptd: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'ptd',
+        key: 'ptd_pk'
+      }
+    },
+    ttype_pk: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'ttype',
+        key: 'ttype_pk'
+      }
+    },
     persontype: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -37,6 +53,18 @@ module.exports = function(sequelize, DataTypes) {
     schema: 'public',
     timestamps: false,
     indexes: [
+      {
+        name: "fkidx_112",
+        fields: [
+          { name: "ptd" },
+        ]
+      },
+      {
+        name: "fkidx_103",
+        fields: [
+          { name: "ttype_pk" },
+        ]
+      },
       {
         name: "eventperson_pk",
         unique: true,

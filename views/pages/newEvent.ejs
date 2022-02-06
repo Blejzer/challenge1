@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+    <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <h1>This is great</h1>
+        <p>Welcome to templating using EJS</p>
+    </div>
+    <div>
+<% if (typeof fac == 'object' && fac && typeof et == 'object' && et) { %>
+            <form action="/event" method="post" class="form-signin">
+                <div class="form-group">
+                    <label for="name">Event Type</label>
+                    <select name="eventtype" class="form-control">
+                        <% for(var i = 0; i < et.length; i++) { %>
+                            <option value='<%= et[i].et_pk %>'><%= et[i].name %></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Event Name</label>
+                    <input type="text" class="form-control" name="name"  />
+                </div>
+                <div class="form-group">
+                    <label for="date_from" >Event start date</label>
+                    <input type="text" class="form-control" id="date_from" name="date_from"  />
+                </div>
+                <div class="form-group">
+                    <label for="date_till">Event end date</label>
+                    <input type="text" class="form-control" id="date_till" name="date_till"  />
+                </div>
+                <div class="form-group">
+                    <label for="name">Facility</label>
+                    <select name="facility" class="form-control">
+                        <% for(var i = 0; i < fac.length; i++) { %>
+                            <option value='<%= fac[i].facility_pk %>'><%= fac[i].name %></option>
+                        <% } %>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        <% } %>
+    </div>
+</main>
+
+<footer>
+    <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

@@ -17,6 +17,6 @@ const operatorsAliases = {
 // console.log(dbConfig);
 
 // Initialize database instance
-const sequelize = new Sequelize(Object.assign({}, dbConfig, { operatorsAliases:0 }));
+const sequelize = new Sequelize(Object.assign({}, dbConfig, { operatorsAliases:1 }));
 
 module.exports = sequelize;

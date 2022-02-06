@@ -28,12 +28,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    location: {
+    facility: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'location',
-        key: 'location_pk'
+        model: 'facility',
+        key: 'facility_pk'
       }
     }
   }, {

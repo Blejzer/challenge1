@@ -1,20 +1,25 @@
-const sequelize = require('../src/config/database');
-const index = require('../src/models/index');
-const countries = require('./tbl_countries');
-const hr = require('./hr');
-const al = require('./al');
-const ba = require('./ba');
-const me = require('./me');
-const mk = require('./mk');
-const rs = require('./rs');
-const xk = require('./xk');
+const sequelize = require('../src/config/database')
+const index = require('../src/models/index')
+const countries = require('./tbl_countries')
+const hr = require('./hr')
+const al = require('./al')
+const ba = require('./ba')
+const me = require('./me')
+const mk = require('./mk')
+const rs = require('./rs')
+const xk = require('./xk')
+const tt = require('./ttypes')
+const td = require('./tdt')
+const et = require('./et')
+const ft = require('./ft')
+const pt = require('./pt')
 
 try {
     index.testConnection().then(result => {
-        console.log('testConnection OK: ' + result);
+        console.log('testConnection OK: ' + result)
     });
 } catch (error) {
-    console.error('testConnection' + error);
+    console.error('testConnection' + error)
 }
 
 const rolesInit = [
@@ -99,6 +104,36 @@ const seed = () => {
                 })
                 .then(() => {
                     return index.models.models(sequelize).City.bulkCreate(xk.cities, {returning: false})
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                })
+                .then(() => {
+                    return index.models.models(sequelize).Ttype.bulkCreate(tt.names, {returning: false})
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                })
+                .then(() => {
+                    return index.models.models(sequelize).TDtype.bulkCreate(td.names, {returning: false})
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                })
+                .then(() => {
+                    return index.models.models(sequelize).Eventtype.bulkCreate(et.names, {returning: false})
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                })
+                .then(() => {
+                    return index.models.models(sequelize).FacilityType.bulkCreate(ft.titles, {returning: false})
+                        .catch((error) => {
+                            console.log(error);
+                        })
+                })
+                .then(() => {
+                    return index.models.models(sequelize).Persontype.bulkCreate(pt.titles, {returning: false})
                         .catch((error) => {
                             console.log(error);
                         })
